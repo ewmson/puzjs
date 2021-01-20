@@ -1,6 +1,6 @@
-// 
+//
 // reference: https://code.google.com/archive/p/puz/wikis/FileFormat.wiki
-
+import { decode as decodeHTMLEscaping } from 'he';
 // === ENCODE ===
 function numToBytes(len, val) {
   val = val || 0;
@@ -406,7 +406,7 @@ function PUZtoJSON(buffer) {
       result += String.fromCharCode(b);
       b = bytes[ibyte++];
     }
-    return result;
+    return decodeHTMLEscaping(result);
   }
 
   info.title = readString();
@@ -446,4 +446,3 @@ var Puz = {
     return PUZtoJSON(bytes);
   },
 }
-
